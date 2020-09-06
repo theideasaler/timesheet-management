@@ -12,8 +12,7 @@
                 <mat-label>Password</mat-label>
                 <input matInput formControlName="password" type="password" placeholder="Enter password" />
             </mat-form-field>
-            <mat-error *ngIf="error$ | async | propertypipe: 'error'">{{error$ | async | propertypipe:'error'}}
-            </mat-error>
+            <mat-error *ngIf="error$ | async">{{error$ | async}}</mat-error>
         </div>
         <div class="actions">
             <button mat-flat-button class="w-100" color="primary" type="submit">Login</button>

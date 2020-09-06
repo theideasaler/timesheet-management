@@ -1,0 +1,54 @@
+@import '../../../styles/index.scss';
+
+.table-column {
+    max-width: 25vw;
+
+    &.cdk-drag-preview {
+        background-color: #f4f4f4;
+
+        .table-header,
+        .table-cell {
+            border-color: #cccccc;
+            border-left: 1px solid #cccccc;
+        }
+    }
+}
+
+.table-header {
+    position: relative;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    // border-right: 1px solid #e4e4e4;
+    height: 68px;
+    max-height: 68px;
+
+    mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.table-cell {
+    // border-right: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    height: 52px;
+    max-height: 52px;
+    display: flex;
+
+    &>div {
+        padding: 5px 0;
+        margin: auto 0;
+        overflow-y: auto;
+    }
+}
+
+.table-header,
+.table-cell {
+    padding: 0 20px;
+    overflow-x: hidden;
+
+    @include media("<=tablet") {
+        padding: 0 5px;
+    }
+}

@@ -4,7 +4,10 @@ import { Store, select } from '@ngrx/store';
 import { LoginActions } from '../../store/actions/index';
 import { Observable } from 'rxjs';
 import { AuthState } from '../../store/reducers/auth.reducer';
-import { selectAuthFeature } from '../../store/selectors/auth.selector';
+import {
+  selectAuthFeature,
+  selectAuthError,
+} from '../../store/selectors/auth.selector';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +16,7 @@ import { selectAuthFeature } from '../../store/selectors/auth.selector';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
-  public error$: Observable<AuthState> = this.store.pipe(
-    select(selectAuthFeature)
-  );
+  public error$: Observable<string> = this.store.pipe(select(selectAuthError));
   constructor(
     private fb: FormBuilder,
     private store: Store<{ auth: AuthState }>

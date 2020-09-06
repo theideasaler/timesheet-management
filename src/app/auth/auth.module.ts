@@ -7,13 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoginComponent } from './content/login/login.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { rootReducers } from './store/index.state';
 import { AuthEffects } from './store/effects/auth.effects';
 import { AuthRoutingModule } from './auth.routing.module';
-import { PropertypipePipe } from '@pipes/propertypipe.pipe';
+import { fromAuth } from './store/reducers';
 
 @NgModule({
-  declarations: [LoginComponent, PropertypipePipe],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,8 +20,9 @@ import { PropertypipePipe } from '@pipes/propertypipe.pipe';
     MatInputModule,
     MatButtonModule,
     AuthRoutingModule,
-    StoreModule.forRoot(rootReducers, {}),
-    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forFeature('auth', fromAuth.authReducer),
+    EffectsModule.forFeature([AuthEffects]),
   ],
+  exports: [],
 })
 export class AuthModule {}

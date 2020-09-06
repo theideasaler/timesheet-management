@@ -1,0 +1,21 @@
+<div>
+    <div class="table-container flex" cdkDropList cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)">
+        <div class="table-column flex-grow-1"
+            *ngFor="let field of dataCopy.visibleFields; let i = index; trackBy: trackByFn" cdkDrag>
+            <div class="table-header flex align-items-center">
+                <mat-icon matPrefix cdkDragHandle>
+                    drag_indicator
+                </mat-icon>
+                {{field | capitalcase}}
+            </div>
+            <div *ngIf="dataCopy.items" class="table-content flex-column">
+                <div class="table-cell" *ngFor="let item of dataCopy.items; let itemIdenx = index; trackBy: trackByFn">
+                    <div class="flex-grow-1 flex">
+                        {{dataCopy.items[itemIdenx][field]}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
