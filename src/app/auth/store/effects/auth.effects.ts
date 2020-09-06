@@ -3,7 +3,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { LoginActions, AuthActions } from '../actions/index';
-import { AuthService } from '@services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class AuthEffects {
           map((user) => AuthActions.loginSuccess({ user })),
           tap(() => {
               this.authService.setToken('mock jwt token');
-              this.router.navigate(['/timesheet']);
+              this.router.navigate(['/timesheets']);
             }),
           catchError((error) => of(AuthActions.loginFailure({ error })))
         )

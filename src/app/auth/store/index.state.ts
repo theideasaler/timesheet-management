@@ -10,6 +10,3 @@ export interface AppState {
 export const rootReducers: ActionReducerMap<AppState> = {
   auth: authReducer
 };
-
-export const selectAuthFeature = (state: AppState) => state.auth;
-export const selectAuthError = (state: AppState) => state.auth.error;

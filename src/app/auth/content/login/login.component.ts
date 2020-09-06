@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { LoginActions } from '@store/actions/index';
+import { LoginActions } from '../../store/actions/index';
 import { Observable } from 'rxjs';
-import { AuthState } from '@store/reducers/auth.reducer';
-import { selectAuthFeature } from '@store/index.state';
+import { AuthState } from '../../store/reducers/auth.reducer';
+import { selectAuthFeature } from '../../store/selectors/auth.selector';
 
 @Component({
   selector: 'app-login',

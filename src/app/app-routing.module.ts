@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from '@content/login/login.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: 'login' },
+  { path: '', redirectTo: '/timesheets', pathMatch: 'full' },
+  {
+    path: 'timesheets',
+    loadChildren: () =>
+      import('./timesheets/timesheets.module').then((m) => m.TimesheetsModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    redirectTo: '/',
+  },
 ];
 
 @NgModule({

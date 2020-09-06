@@ -20,14 +20,8 @@
     ],
     "paths": {
       "@models/*":["src/app/models/*"],
-      "@services/*":["src/app/services/*"],
-      "@shared/*":["src/app/_shared/*"],
-      "@content/*":["src/app/content/*"],
-      "@directives/*":["src/app/directives/*"],
-      "@guards/*":["src/app/guards/*"],
       "@pipes/*":["src/app/pipes/*"],
       "@utils/*":["src/app/utils/*"],
-      "@store/*":["src/app/store/*"],
     }
   },
   "angularCompilerOptions": {
