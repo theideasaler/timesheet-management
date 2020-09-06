@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="login-form">
+    <form (ngSubmit)="login()" [formGroup]="loginForm">
+        <div class="title">
+            <h2>Timesheets Dashboard</h2>
+        </div>
+        <div class="fields flex-column">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" type="username" placeholder="Login username" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" placeholder="Enter password" />
+            </mat-form-field>
+            <mat-error *ngIf="error$ | async | propertypipe: 'error'">{{error$ | async | propertypipe:'error'}}
+            </mat-error>
+        </div>
+        <div class="actions">
+            <button mat-flat-button class="w-100" color="primary" type="submit">Login</button>
+        </div>
+    </form>
+</div>
