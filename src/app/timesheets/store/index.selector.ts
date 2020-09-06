@@ -19,3 +19,8 @@ export const selectReadOnlyFields = createSelector(
   selectTimesheetsFeature,
   (feature: TimeSheetModuleState) => feature.readOnlyFields
 );
+
+export const selectEditingRows = createSelector(
+  selectTimesheetsFeature,
+  (feature: TimeSheetModuleState) => feature.editingStatus
+);

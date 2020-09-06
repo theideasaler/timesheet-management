@@ -1,12 +1,12 @@
 <div class="basics flex space-between">
     <div class="actions">
-        <button mat-flat-button color="primary">
+        <button mat-flat-button color="primary" (click)="createTimesheet()">
             <mat-icon class="flex align-items-center">add</mat-icon>
             <span class="md-d-none">
                 New
             </span>
         </button>
-        <button mat-flat-button class="green-button">
+        <button mat-flat-button class="green-button" (click)="submitEditing()">
             <mat-icon class="flex align-items-center">done</mat-icon>
             <span class="md-d-none">
                 Submit
@@ -30,14 +30,23 @@
                     {{field | capitalcase}}
                 </div>
                 <div class="table-content flex-column" *ngIf="timesheets">
-                    <div class="table-cell"
-                        *ngFor="let timesheet of timesheets; index as itemIndex; trackBy: trackByFn">
+                    <div class="table-cell" *ngFor="let timesheet of timesheets; index as rowIndex; trackBy: trackByFn">
                         <div class="flex-grow-1 flex">
-                            {{timesheet[field]}}
+                            <ng-container *ngIf="!(editingRows | arrIncludes: rowIndex); else editMode">
+                                {{timesheet[field]}}
+                            </ng-container>
+                            <ng-template #editMode>
+                                <mat-form-field appearance="legacy">
+                                    <input matInput placeholder="{{field | capitalcase}}" [(ngModel)]="timesheet[field]"
+                                        [disabled]="readOnlyFields | arrIncludes: field" />
+                                </mat-form-field>
+                            </ng-template>
                         </div>
+
                     </div>
                 </div>
             </div>
+            <app-actions-column [data]="timesheets" (cancel)="cancelNewRow()" (saveNew)="saveNewRow()"></app-actions-column>
         </div>
     </div>
 </div>

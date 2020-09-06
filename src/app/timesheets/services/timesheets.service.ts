@@ -51,7 +51,54 @@ const timesheets: TimeSheet[] = [
 })
 export class TimesheetsService {
   public load() {
+    // http://endpoint-url/get/timesheets
     const items: TimeSheet[] = timesheets;
     return of(items).pipe(delay(350));
+  }
+
+  public deleteOne({ index, _id }: { index: number; _id: string }) {
+    // http://endpoint-url/delete/timesheets/_id
+    const res = { index, _id };
+    return of(res).pipe(delay(250));
+  }
+
+  public saveOne({ index, data }: { index: number; data: TimeSheet }) {
+    // http://endpoint-url/save/timesheets/_id
+    const res = { index, data };
+    return of(res).pipe(delay(250));
+  }
+
+  public addOne({ data }) {
+    // http://endpoint-url/create/timesheets/{data}
+    const newData = { ...data };
+    newData[`state`] = 'Active';
+    newData[`_id`] = `Random_ID-${+new Date()}`;
+    const res = { data: newData };
+    return of(res).pipe(delay(250));
+  }
+
+  public submitOnes({
+    dataMap,
+    includesNew,
+  }: {
+    dataMap: Map<number, TimeSheet>;
+    includesNew?: boolean;
+  }) {
+    // http://endpoint-url/create/timesheets/{data}
+    const newDataMap = new Map<number, TimeSheet>();
+    const indexes:number[] = [];
+    for (const [keyIndex, item] of dataMap.entries()) {
+      const newItem = {...item};
+      if (keyIndex === 0 && includesNew) {
+        newItem[`state`] = 'Submitted';
+        newItem[`_id`] = `Random_ID-${+new Date()}`;
+      } else {
+        newItem[`state`] = 'Submitted';
+      }
+      newDataMap.set(keyIndex, newItem);
+      indexes.push(keyIndex);
+    }
+    const res = { dataMap: newDataMap, includesNew, indexes};
+    return of(res).pipe(delay(250));
   }
 }

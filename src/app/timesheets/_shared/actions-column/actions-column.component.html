@@ -1,0 +1,36 @@
+<div class="table-column flex-grow-1">
+    <div class="table-header flex align-items-center">
+        {{columnName}}
+    </div>
+    <div class="table-content flex-column" *ngIf="data">
+        <div class="table-cell" *ngFor="let timesheet of data; index as i;">
+            <div class="flex-grow-1 flex">
+                <div class="actions-block">
+                    <div class="active-row" *ngIf="timesheet.state !== STATE.SUBMITTED">
+                        <ng-container *ngIf="editingRows$ | async | arrIncludes: i; else inactiveMode">
+                            <button mat-stroked-button color="accent" (click)="saveRow(i)">
+                                <mat-icon>save</mat-icon>
+                            </button>
+                        </ng-container>
+                        <ng-template #inactiveMode>
+                            <button mat-stroked-button color="accent" (click)="editRow(i)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </ng-template>
+                        <ng-container *ngIf="!!timesheet.state; else cancelButton">
+                            <button mat-stroked-button color="warn" (click)="deleteRow(i)">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                        </ng-container>
+                        <ng-template #cancelButton>
+                            <button mat-stroked-button color="warn" (click)="cancelNew()">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </ng-template>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

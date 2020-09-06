@@ -1,6 +1,6 @@
 @import '../../../styles/index.scss';
 
-.basics {
+::ng-deep .basics {
     padding: 20px 10px;
 
     button:not(:first-child) {
@@ -32,7 +32,7 @@
     }
 }
 
-.table-header {
+::ng-deep .table-header {
     position: relative;
     border-top: 1px solid #e4e4e4;
     border-bottom: 1px solid #e4e4e4;
@@ -47,7 +47,7 @@
     }
 }
 
-.table-cell {
+::ng-deep .table-cell {
     // border-right: 1px solid #e4e4e4;
     border-bottom: 1px solid #e4e4e4;
     height: 52px;
@@ -61,12 +61,16 @@
     }
 }
 
-.table-header,
-.table-cell {
+::ng-deep .table-header,
+::ng-deep .table-cell {
     padding: 0 20px;
     overflow-x: hidden;
 
     @include media("<=tablet") {
         padding: 0 5px;
     }
+}
+
+:host ::ng-deep .mat-form-field-infix {
+    width: auto !important;
 }

@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { TimeSheetsActions } from '../../store/actions';
-import { selectTimesheetsItems, selectDefaultRate, selectVisibleFields, selectReadOnlyFields } from '../../store/index.selector';
+import {
+  selectTimesheetsItems,
+  selectDefaultRate,
+  selectVisibleFields,
+  selectReadOnlyFields,
+  selectEditingRows,
+} from '../../store/index.selector';
 import { TimeSheet } from '@models/timesheet.model';
 import { TimeSheetModuleState } from '../../store/index.state';
 
@@ -24,15 +30,13 @@ export class TimesheetContainerComponent implements OnInit {
   public readOnlyFields$: Observable<string[]> = this.store.pipe(
     select(selectReadOnlyFields)
   );
-
+  public editingRows$: Observable<number[]> = this.store.pipe(
+    select(selectEditingRows)
+  );
 
   constructor(private store: Store<{ timesheetsRoot: TimeSheetModuleState }>) {}
 
   ngOnInit(): void {
-    this.timesheets$.subscribe((item) => console.log('timesheets:', item));
-    this.defaulthourlyRate$.subscribe((item) => console.log('defaulthourlyRate:', item));
-    this.visibleFields$.subscribe((item) => console.log('visibleFields:', item));
-    this.readOnlyFields$.subscribe((item) => console.log('readOnlyFields:', item));
     this.store.dispatch(TimeSheetsActions.loadTimeSheets());
   }
 }

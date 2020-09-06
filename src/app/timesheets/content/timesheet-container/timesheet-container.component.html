@@ -1,5 +1,5 @@
 <div class="timesheets-container">
     <app-timesheets-view [timesheets]="timesheets$ | async" [defaulthourlyRate]="defaulthourlyRate$ | async"
-        [visibleFields]="visibleFields$ | async" [readOnlyFields]="readOnlyFields$ | async">
+        [visibleFields]="visibleFields$ | async" [readOnlyFields]="readOnlyFields$ | async" [editingRows]="editingRows$ | async">
     </app-timesheets-view>
 </div>
