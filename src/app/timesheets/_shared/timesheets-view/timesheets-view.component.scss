@@ -1,6 +1,24 @@
 @import '../../../styles/index.scss';
 
-.table-column {
+.basics {
+    padding: 20px 10px;
+
+    button:not(:first-child) {
+        margin-left: 20px;
+    }
+}
+
+::ng-deep .mat-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+        font-size: 20px;
+    }
+}
+
+::ng-deep .table-column {
     max-width: 25vw;
 
     &.cdk-drag-preview {

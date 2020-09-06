@@ -1,18 +1,40 @@
-<div>
-    <div class="table-container flex" cdkDropList cdkDropListOrientation="horizontal"
-        (cdkDropListDropped)="drop($event)">
-        <div class="table-column flex-grow-1"
-            *ngFor="let field of dataCopy.visibleFields; let i = index; trackBy: trackByFn" cdkDrag>
-            <div class="table-header flex align-items-center">
-                <mat-icon matPrefix cdkDragHandle>
-                    drag_indicator
-                </mat-icon>
-                {{field | capitalcase}}
-            </div>
-            <div *ngIf="dataCopy.items" class="table-content flex-column">
-                <div class="table-cell" *ngFor="let item of dataCopy.items; let itemIdenx = index; trackBy: trackByFn">
-                    <div class="flex-grow-1 flex">
-                        {{dataCopy.items[itemIdenx][field]}}
+<div class="basics flex space-between">
+    <div class="actions">
+        <button mat-flat-button color="primary">
+            <mat-icon class="flex align-items-center">add</mat-icon>
+            <span class="md-d-none">
+                New
+            </span>
+        </button>
+        <button mat-flat-button class="green-button">
+            <mat-icon class="flex align-items-center">done</mat-icon>
+            <span class="md-d-none">
+                Submit
+            </span>
+        </button>
+    </div>
+    <div class="default-rate flex-column justify-content-center">
+        Default Hourly Rate: {{defaulthourlyRate | number: '1.2-2'}}
+    </div>
+</div>
+<div class="timesheets-content">
+    <div>
+        <div class="table-container flex" cdkDropList cdkDropListOrientation="horizontal"
+            (cdkDropListDropped)="drop($event)">
+            <div class="table-column flex-grow-1" *ngFor="let field of visibleFields; let i = index; trackBy: trackByFn"
+                cdkDrag>
+                <div class="table-header flex align-items-center">
+                    <mat-icon matPrefix cdkDragHandle>
+                        drag_indicator
+                    </mat-icon>
+                    {{field | capitalcase}}
+                </div>
+                <div class="table-content flex-column" *ngIf="timesheets">
+                    <div class="table-cell"
+                        *ngFor="let timesheet of timesheets; index as itemIndex; trackBy: trackByFn">
+                        <div class="flex-grow-1 flex">
+                            {{timesheet[field]}}
+                        </div>
                     </div>
                 </div>
             </div>

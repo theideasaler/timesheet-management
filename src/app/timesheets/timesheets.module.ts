@@ -15,7 +15,7 @@ import { CapitalcasePipe } from '@pipes/capitalcase.pipe';
 import { EffectsModule } from '@ngrx/effects';
 import { TimesheetEffects } from './store/effects/timesheets.effect';
 import { StoreModule } from '@ngrx/store';
-import { fromTimesheets } from './store/reducers';
+import { reducers } from './store/reducers';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { fromTimesheets } from './store/reducers';
     MatButtonModule,
     MatIconModule,
     DragDropModule,
-    StoreModule.forFeature('timesheets', fromTimesheets.timeSheetsReducer),
+    StoreModule.forFeature('timesheetsRoot', reducers),
     EffectsModule.forFeature([TimesheetEffects]),
   ],
   exports: [PropertypipePipe, CapitalcasePipe],

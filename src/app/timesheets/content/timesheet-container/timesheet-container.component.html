@@ -1,24 +1,5 @@
 <div class="timesheets-container">
-    <div class="basics flex space-between">
-        <div class="actions">
-            <button mat-flat-button color="primary">
-                <mat-icon class="flex align-items-center">add</mat-icon>
-                <span class="md-d-none">
-                    New
-                </span>
-            </button>
-            <button mat-flat-button class="green-button">
-                <mat-icon class="flex align-items-center">done</mat-icon>
-                <span class="md-d-none">
-                    Submit
-                </span>
-            </button>
-        </div>
-        <div class="default-rate flex-column justify-content-center">
-            Default Hourly Rate: {{timesheets$ | async | propertypipe:'defaulthourlyRate' | number: '1.2-2'}}
-        </div>
-    </div>
-    <div class="timesheets-content">
-        <app-timesheets-view [timesheets]="timesheets$ | async"></app-timesheets-view>
-    </div>
+    <app-timesheets-view [timesheets]="timesheets$ | async" [defaulthourlyRate]="defaulthourlyRate$ | async"
+        [visibleFields]="visibleFields$ | async" [readOnlyFields]="readOnlyFields$ | async">
+    </app-timesheets-view>
 </div>

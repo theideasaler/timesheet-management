@@ -1,12 +1,14 @@
 import {
   Component,
-  OnInit,
   Input,
   OnChanges,
   SimpleChanges,
+  OnInit,
+  ChangeDetectorRef,
 } from '@angular/core';
-import { TimesheetState } from '../../store/reducers/timesheet.reducer';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import * as _ from 'lodash';
+import { TimeSheet } from '@models/timesheet.model';
 
 @Component({
   selector: 'app-timesheets-view',
@@ -14,30 +16,33 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./timesheets-view.component.scss'],
 })
 export class TimesheetsViewComponent implements OnInit, OnChanges {
-  @Input() timesheets: TimesheetState;
-  public dataCopy: TimesheetState;
+  @Input() timesheets: TimeSheet[];
+  @Input() defaulthourlyRate: number;
+  @Input() visibleFields: string[];
+  @Input() readOnlyFields: string[];
+  public dataReady = false;
 
-  constructor() {}
-
+  constructor(readonly cd: ChangeDetectorRef) {}
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.timesheets) {
-      this.dataCopy = JSON.parse(
-        JSON.stringify(changes.timesheets.currentValue)
-      );
-    }
+    [
+      'timesheets',
+      'defaulthourlyRate',
+      'visibleFields',
+      'readOnlyFields',
+    ].forEach((key) => {
+      if (changes[key] && changes[key].currentValue) {
+        this[key] = _.cloneDeep(changes[key].currentValue);
+      }
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 
   public trackByFn(index: number) {
     return index;
   }
 
   public drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(
-      this.dataCopy.visibleFields,
-      event.previousIndex,
-      event.currentIndex
-    );
+    moveItemInArray(this.timesheets, event.previousIndex, event.currentIndex);
   }
 }
